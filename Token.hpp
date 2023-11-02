@@ -17,6 +17,7 @@ public:
 
 private:
 	static std::string	_typesNames[39];
+
 	TokenType	_type;
 	std::string	_lexeme;
 };
