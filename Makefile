@@ -1,24 +1,27 @@
 CC := c++
 CPPFLAGS := -Wall -Wextra -Werror -std=c++11 -g
-RM := rm -f
+RM := rm -rf
 
 NAME := cpplox
 
-CLASSES := Scanner.hpp Token.hpp TokenType.hpp
+SRC_DIR := src/
+OBJ_DIR := obj/
 
-SRCS := main.cpp Scanner.cpp Token.cpp
-OBJS := $(SRCS:%.cpp=%.o)
+HEADERS := common.hpp Lox.hpp ErrorReporter.hpp Token.hpp TokenType.hpp
+
+SRCS := $(wildcard *.cpp)
+OBJS = $(SRCS:%.cpp=%.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	@$(CC) $^ -o $@
 
-%.o: %.cpp $(CLASSES)
+%.o: %.cpp $(HEADERS)
 	@$(CC) $(CPPFLAGS) -c $< -o $@
 
 clean:
-	@$(RM) $(OBJS)
+	@$(RM) $(OBJ_DIR)
 fclean: clean
 	@$(RM) $(NAME)
 re: fclean all

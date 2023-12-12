@@ -1,23 +1,22 @@
 #pragma once
 
-#include <string>
-#include "TokenType.hpp"
+#ifndef __TOKEN_HPP__
+#define __TOKEN_HPP__
 
-class	Token {
+#include "common.hpp"
+
+class   Token {
 public:
-	Token() = default;
-	Token(TokenType type, const std::string& lexeme);
-	Token(const Token&) = default;
-	~Token();
+    Token(TokenType type, const std::string& lexeme, size_t line);
 
-	Token&	operator=(const Token&) = default;
+    friend std::ostream&    operator<<(std::ostream& os, const Token& t);
 
-	const std::string	getType() const;
-	const std::string&	getLexeme() const;
+    static std::map<TokenType, std::string>    m;
 
 private:
-	static std::string	_typesNames[39];
-
-	TokenType	_type;
-	std::string	_lexeme;
+    TokenType   _type;
+    std::string _lexeme;
+    size_t      _line;
 };
+
+#endif
