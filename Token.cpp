@@ -44,8 +44,14 @@ Token::Token(TokenType type, const std::string& lexeme, size_t line)
 {
 }
 
+TokenType   Token::getType() const { return _type; }
+
+const std::string&  Token::getLexeme() const { return _lexeme; }
+
+size_t  Token::getLine() const { return _line; }
+
 std::ostream&   operator<<(std::ostream& os, const Token& t) {
-    std::cout << "type: " << m[t._type] << ", value: " << t._lexeme
+    os << "type: " << m[t._type] << ", value: " << t._lexeme
             << ", line: " << t._line << std::endl;
     return os;
 }

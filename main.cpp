@@ -6,15 +6,16 @@
 }
 
 int	main(int argc, char* argv[]) {
-	if (argc > 2) {
-		fatal(std::string("Usage") + argv[0] + "[script]", USGERR);
-	}
-    Lox lobj;
+	//if (argc > 2) {
+	//	fatal(std::string("Usage") + argv[0] + "[script]", USGERR);
+	//}
+    //Lox lobj;
 
-    if (argc == 2) {
-        lobj.runFile(argv[1]);
-    } else {
-        lobj.runPrompt();
-    }
+    //if (argc == 2) {
+    //    lobj.runFile(argv[1]);
+    //} else {
+    //    lobj.runPrompt();
+    //}
+
     std::exit(EXIT_SUCCESS);
 }

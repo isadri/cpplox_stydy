@@ -6,13 +6,10 @@ void    Lox::runFile(const char* file) {
     if (!infile.is_open()) {
         fatal(std::string("Can't open file: ") + file, 1);
     }
-    std::string         line;
+    std::stringstream   buffer;
     
-    while (readLine(infile, line)) {
-        run(line);
-        if (ErrorReporter::hadError)
-            std::exit(SYNERR);
-    }
+    buffer << infile.rdbuf();
+    run(buffer.str());
 }
 
 void    Lox::runPrompt() {

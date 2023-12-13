@@ -1,0 +1,11 @@
+expression  ->  lieteral | unary | binary | grouping;
+
+lieteral    ->  NUMBER | STRING | "true" | "false" | "nil";
+
+grouping    ->  "(" expression ")";
+
+unary       ->  ( "-" | "!" ) expression;
+
+binary      ->  expression operator expression;
+
+operator    ->  "==" | "!=" | "<" | "<=" | ">" | ">=" | "+" | "-" | "*" | "/";

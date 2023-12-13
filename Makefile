@@ -7,7 +7,8 @@ NAME := cpplox
 SRC_DIR := src/
 OBJ_DIR := obj/
 
-HEADERS := common.hpp Lox.hpp ErrorReporter.hpp Token.hpp TokenType.hpp
+HEADERS := common.hpp Lox.hpp ErrorReporter.hpp Token.hpp TokenType.hpp \
+Scanner.hpp Expr.hpp Binary.hpp Grouping.hpp Literal.hpp Unary.hpp
 
 SRCS := $(wildcard *.cpp)
 OBJS = $(SRCS:%.cpp=%.o)

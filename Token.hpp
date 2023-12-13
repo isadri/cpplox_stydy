@@ -13,6 +13,10 @@ public:
 
     static std::map<TokenType, std::string>    m;
 
+    TokenType           getType() const;
+    const std::string&  getLexeme() const;
+    size_t              getLine() const;
+
 private:
     TokenType   _type;
     std::string _lexeme;
