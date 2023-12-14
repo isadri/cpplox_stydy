@@ -1,8 +1,4 @@
 #include "AstPrinter.hpp"
-#include "Binary.hpp"
-#include "Grouping.hpp"
-#include "Literal.hpp"
-#include "Unary.hpp"
 
 std::string AstPrinter::print(Expr& expr) {
     return expr.accept(*this);

@@ -14,7 +14,7 @@ public:
     Parser(const Parser&) = delete;
     Parser& operator=(const Parser&) = delete;
 
-    Expr*   parse();
+    std::shared_ptr<Expr>   parse();
 
 private:
     std::list<Token>    _tokens;
@@ -23,21 +23,21 @@ private:
     bool    match(std::initializer_list<TokenType> types);
     bool    check(TokenType type);
     Token   advance();
-    bool    isAtEnd() const;
-    Token   peek() const;
-    Token   previous() const;
+    bool    isAtEnd();
+    Token   peek();
+    Token   previous();
     Token   consume(TokenType type, const std::string& message);
 
     ParseException  error(Token token, const std::string& message);
     void            synchronize() noexcept;
 
-    Expr*   expression();
-    Expr*   equality();
-    Expr*   comparison();
-    Expr*   term();
-    Expr*   factor();
-    Expr*   unary();
-    Expr*   primary();
+    std::shared_ptr<Expr>   expression();
+    std::shared_ptr<Expr>   equality();
+    std::shared_ptr<Expr>   comparison();
+    std::shared_ptr<Expr>   term();
+    std::shared_ptr<Expr>   factor();
+    std::shared_ptr<Expr>   unary();
+    std::shared_ptr<Expr>   primary();
 };
 
 #endif

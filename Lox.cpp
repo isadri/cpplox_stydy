@@ -46,7 +46,7 @@ void    Lox::error(Token token, const std::string &message) {
     if (token.getType() == END) {
         ErrorReporter::report(token.getLine(), " at end", message);
     } else {
-        ErrorReporter::report(token.getLine(), " at '" + token.getLexeme(),
-                            message);
+        ErrorReporter::report(token.getLine(), " at '" + token.getLexeme()
+                            + "'", message);
     }
 }

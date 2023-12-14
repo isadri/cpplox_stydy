@@ -1,13 +1,13 @@
-#include "Grouping.hpp"
+#include "Expr.hpp"
 
-Grouping::Grouping(Expr* expression) : _expression(expression) {}
+Grouping::Grouping(std::shared_ptr<Expr> expression) : _expression(expression) {
+}
 
 std::string Grouping::accept(Visitor& visitor) {
     return visitor.visitGroupingExpr(*this);
 }
 
 Grouping::~Grouping() {
-    //delete _expression;
 }
 
 Expr&   Grouping::getExpr() const { return *_expression; }

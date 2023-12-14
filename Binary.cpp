@@ -1,6 +1,7 @@
-#include "Binary.hpp"
+#include "Expr.hpp"
 
-Binary::Binary(Expr* left, Token* opt, Expr* right)
+Binary::Binary(std::shared_ptr<Expr> left, std::shared_ptr<Token> opt,
+                std::shared_ptr<Expr> right)
     : _left(left)
     , _opt(opt)
     , _right(right)
@@ -8,9 +9,6 @@ Binary::Binary(Expr* left, Token* opt, Expr* right)
 }
 
 Binary::~Binary() {
-    //delete _left;
-    //delete _opt;
-    //delete _right;
 }
 
 std::string Binary::accept(Visitor& visitor) {

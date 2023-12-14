@@ -31,7 +31,8 @@ public:
 
 class   Binary : public Expr {
 public:
-    Binary(Expr* left, Token* opt, Expr* right);
+    Binary(std::shared_ptr<Expr> left, std::shared_ptr<Token> opt,
+            std::shared_ptr<Expr> right);
     virtual ~Binary();
 
     virtual std::string accept(Visitor& visitor) override;
@@ -44,14 +45,11 @@ private:
     std::shared_ptr<Expr>   _left;
     std::shared_ptr<Token>  _opt;
     std::shared_ptr<Expr>   _right;
-    //Expr*   _left;
-    //Token*  _opt;
-    //Expr*   _right;
 };
 
 class   Grouping : public Expr {
 public:
-    Grouping(Expr* expression);
+    Grouping(std::shared_ptr<Expr> expression);
     virtual ~Grouping();
 
     virtual std::string accept(Visitor& visitor) override;
@@ -60,7 +58,6 @@ public:
 
 private:
     std::shared_ptr<Expr>   _expression;
-    //Expr*   _expression;
 };
 
 class   Literal : public Expr {
@@ -78,7 +75,7 @@ private:
 
 class   Unary : public Expr {
 public:
-    Unary(Token* opt, Expr* right);
+    Unary(std::shared_ptr<Token> opt, std::shared_ptr<Expr> right);
     virtual ~Unary();
 
     virtual std::string accept(Visitor& visitor) override;
@@ -89,8 +86,6 @@ public:
 private:
     std::shared_ptr<Token>  _opt;
     std::shared_ptr<Expr>   _right;
-    //Token*  _opt;
-    //Expr*   _right;
 };
 
 #endif

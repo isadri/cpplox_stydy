@@ -1,5 +1,5 @@
 CC := c++
-CPPFLAGS := -Wall -Wextra -Werror -std=c++11 -g
+CPPFLAGS := -Wall -Wextra -Werror -std=c++17 -g
 RM := rm -rf
 
 NAME := cpplox

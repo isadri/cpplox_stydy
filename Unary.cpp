@@ -1,14 +1,16 @@
-#include "Unary.hpp"
+#include "Expr.hpp"
 
-Unary::Unary(Token* opt, Expr* right) : _opt(opt), _right(right) {}
+Unary::Unary(std::shared_ptr<Token> opt, std::shared_ptr<Expr> right)
+    : _opt(opt)
+    , _right(right)
+{
+}
 
 std::string Unary::accept(Visitor& visitor) {
     return visitor.visitUnaryExpr(*this);
 }
 
 Unary::~Unary() {
-    //delete _opt;
-    //delete _right;
 }
 
 Token&  Unary::getOpt() const { return *_opt; }
