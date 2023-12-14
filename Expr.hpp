@@ -41,9 +41,12 @@ public:
     Expr&   getRight() const;
 
 private:
-    Expr*   _left;
-    Token*  _opt;
-    Expr*   _right;
+    std::shared_ptr<Expr>   _left;
+    std::shared_ptr<Token>  _opt;
+    std::shared_ptr<Expr>   _right;
+    //Expr*   _left;
+    //Token*  _opt;
+    //Expr*   _right;
 };
 
 class   Grouping : public Expr {
@@ -56,7 +59,8 @@ public:
     Expr&   getExpr() const;
 
 private:
-    Expr*   _expression;
+    std::shared_ptr<Expr>   _expression;
+    //Expr*   _expression;
 };
 
 class   Literal : public Expr {
@@ -83,8 +87,10 @@ public:
     Expr&   getRight() const;
 
 private:
-    Token*  _opt;
-    Expr*   _right;
+    std::shared_ptr<Token>  _opt;
+    std::shared_ptr<Expr>   _right;
+    //Token*  _opt;
+    //Expr*   _right;
 };
 
 #endif

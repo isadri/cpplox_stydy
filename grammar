@@ -4,7 +4,7 @@ equality    ->  comparison ( ( "!=" | "==" ) comparison )*;
 
 comparison  ->  term ( ( ">" | "+" ) factor );
 
-term        ->  factor ( ( "-" | "+" ) unary )*;
+term        ->  factor ( ( "-" | "+" ) factor )*;
 
 factor      ->  unary ( ( "/" | "*" ) unary )*;
 

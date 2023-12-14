@@ -7,8 +7,8 @@ std::string Unary::accept(Visitor& visitor) {
 }
 
 Unary::~Unary() {
-    delete _opt;
-    delete _right;
+    //delete _opt;
+    //delete _right;
 }
 
 Token&  Unary::getOpt() const { return *_opt; }

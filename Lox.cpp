@@ -26,9 +26,13 @@ void    Lox::runPrompt() {
 void    Lox::run(const std::string& source) {
     Scanner             scanner(source);
     std::list<Token>    tokens = scanner.scanTokens();
+    Parser              parser(tokens);
+    std::shared_ptr<Expr>   expression(parser.parse());
 
-    for (auto token : tokens)
-        std::cout << token << std::endl;
+    if (ErrorReporter::hadError)
+        return;
+    AstPrinter  ap;
+    std::cout << ap.print(*expression.get()) << std::endl;
 }
 
 bool Lox::readLine(std::istream& infile, std::string& line) {
@@ -36,4 +40,13 @@ bool Lox::readLine(std::istream& infile, std::string& line) {
         return false;
     line += '\n';
     return true;
+}
+
+void    Lox::error(Token token, const std::string &message) {
+    if (token.getType() == END) {
+        ErrorReporter::report(token.getLine(), " at end", message);
+    } else {
+        ErrorReporter::report(token.getLine(), " at '" + token.getLexeme(),
+                            message);
+    }
 }

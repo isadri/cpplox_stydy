@@ -6,6 +6,8 @@
 #include "common.hpp"
 #include "Token.hpp"
 #include "Scanner.hpp"
+#include "Parser.hpp"
+#include "AstPrinter.hpp"
 
 class   Lox {
 public:
@@ -17,6 +19,8 @@ public:
 
     void    runFile(const char* file);
     void    runPrompt();
+
+    static void error(Token token, const std::string& message);
 
 private:
     void    run(const std::string& source);

@@ -10,6 +10,7 @@
 #include <sstream>
 #include <list>
 #include <map>
+#include <memory>
 #include "ErrorReporter.hpp"
 #include "TokenType.hpp"
 

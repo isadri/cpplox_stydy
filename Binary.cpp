@@ -8,9 +8,9 @@ Binary::Binary(Expr* left, Token* opt, Expr* right)
 }
 
 Binary::~Binary() {
-    delete _left;
-    delete _opt;
-    delete _right;
+    //delete _left;
+    //delete _opt;
+    //delete _right;
 }
 
 std::string Binary::accept(Visitor& visitor) {

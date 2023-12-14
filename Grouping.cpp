@@ -7,7 +7,7 @@ std::string Grouping::accept(Visitor& visitor) {
 }
 
 Grouping::~Grouping() {
-    delete _expression;
+    //delete _expression;
 }
 
 Expr&   Grouping::getExpr() const { return *_expression; }

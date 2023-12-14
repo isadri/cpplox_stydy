@@ -34,6 +34,7 @@ std::list<Token>    Scanner::scanTokens() {
         _start = _current;
         scanToken();
     }
+    _tokens.push_back(Token(END, "", _line));
     return _tokens;
 }
 

@@ -6,32 +6,19 @@
     std::exit(exit_status);
 }
 
+void    f() { system("leaks cpplox"); }
+
 int	main(int argc, char* argv[]) {
-	//if (argc > 2) {
-	//	fatal(std::string("Usage") + argv[0] + "[script]", USGERR);
-	//}
-    //Lox lobj;
+	if (argc > 2) {
+		fatal(std::string("Usage") + argv[0] + "[script]", USGERR);
+	}
+    Lox lobj;
 
-    //if (argc == 2) {
-    //    lobj.runFile(argv[1]);
-    //} else {
-    //    lobj.runPrompt();
-    //}
-
-    (void)argc;
-    (void)argv;
-    Expr*    expr = new Binary(
-        new Unary(
-            new Token(MINUS, "-", 1),
-            new Literal("123")
-        ),
-        new Token(STAR, "*", 1),
-        new Grouping(new Literal("45.57"))
-    );
-
-    AstPrinter  sp;
-
-    std::cout << sp.print(*expr) << std::endl;
-
+    if (argc == 2) {
+        lobj.runFile(argv[1]);
+    } else {
+        lobj.runPrompt();
+    }
+    //f();
     std::exit(EXIT_SUCCESS);
 }
