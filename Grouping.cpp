@@ -3,8 +3,8 @@
 Grouping::Grouping(std::shared_ptr<Expr> expression) : _expression(expression) {
 }
 
-std::string Grouping::accept(Visitor& visitor) {
-    return visitor.visitGroupingExpr(*this);
+void Grouping::accept(Visitor& visitor) {
+    visitor.visitGroupingExpr(*this);
 }
 
 Grouping::~Grouping() {

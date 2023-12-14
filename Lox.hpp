@@ -1,7 +1,7 @@
 #pragma once
 
 #include "AstPrinter.hpp"
-#include "Parser.hpp"
+#include "Visitor.hpp"
 #include "Scanner.hpp"
 #include "Token.hpp"
 #include "common.hpp"

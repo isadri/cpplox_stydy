@@ -1,4 +1,5 @@
 #include "Lox.hpp"
+#include "Parser.hpp"
 
 void    Lox::runFile(const char* file) {
     std::ifstream       infile(file);
@@ -32,7 +33,9 @@ void    Lox::run(const std::string& source) {
     if (ErrorReporter::hadError)
         return;
     AstPrinter  ap;
-    std::cout << ap.print(*expression.get()) << std::endl;
+
+    ap.print(*expression.get());
+    std::cout << "\n";
 }
 
 bool Lox::readLine(std::istream& infile, std::string& line) {

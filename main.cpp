@@ -19,6 +19,22 @@ int	main(int argc, char* argv[]) {
     } else {
         lobj.runPrompt();
     }
+    //(void)argc;
+    //(void)argv;
+
+    //std::shared_ptr<Expr>   expr(
+    //    new Binary(
+    //        new Unary(
+    //            new Token(MINUS, "-", 1),
+    //            new Literal("123")
+    //        ),
+    //        new Token(STAR, "*", 1),
+    //        new Grouping(new Literal("45.67"))
+    //    )
+    //);
+    //AstPrinter  ap;
+
+    //ap.print(*expr);
     //f();
     std::exit(EXIT_SUCCESS);
 }

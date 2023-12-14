@@ -6,8 +6,8 @@ Unary::Unary(std::shared_ptr<Token> opt, std::shared_ptr<Expr> right)
 {
 }
 
-std::string Unary::accept(Visitor& visitor) {
-    return visitor.visitUnaryExpr(*this);
+void Unary::accept(Visitor& visitor) {
+    visitor.visitUnaryExpr(*this);
 }
 
 Unary::~Unary() {

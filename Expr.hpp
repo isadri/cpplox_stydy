@@ -6,8 +6,8 @@
 #include "common.hpp"
 #include "Token.hpp"
 
-class   Grouping;
 class   Binary;
+class   Grouping;
 class   Literal;
 class   Unary;
 class   Visitor;
@@ -16,17 +16,16 @@ class   Expr {
 public:
     virtual ~Expr() {}
 
-    virtual std::string accept(Visitor& visitor) = 0;
+    virtual void accept(Visitor& visitor) = 0;
 };
 
-class   Visitor : public Expr {
+class   Visitor {
 public:
     virtual ~Visitor() {}
-    virtual std::string visitGroupingExpr(Grouping& expr) = 0;
-    virtual std::string visitBinaryExpr(Binary& expr) = 0;
-    virtual std::string visitLiteralExpr(Literal& expr) = 0;
-    virtual std::string visitUnaryExpr(Unary& expr) = 0;
-    virtual std::string accept(Visitor& visitor) = 0;
+    virtual void    visitGroupingExpr(Grouping& expr) = 0;
+    virtual void    visitBinaryExpr(Binary& expr) = 0;
+    virtual void    visitLiteralExpr(Literal& expr) = 0;
+    virtual void    visitUnaryExpr(Unary& expr) = 0;
 };
 
 class   Binary : public Expr {
@@ -35,7 +34,7 @@ public:
             std::shared_ptr<Expr> right);
     virtual ~Binary();
 
-    virtual std::string accept(Visitor& visitor) override;
+    virtual void accept(Visitor& visitor) override;
 
     Expr&   getLeft() const;
     Token&  getOpt() const;
@@ -52,7 +51,7 @@ public:
     Grouping(std::shared_ptr<Expr> expression);
     virtual ~Grouping();
 
-    virtual std::string accept(Visitor& visitor) override;
+    virtual void accept(Visitor& visitor) override;
 
     Expr&   getExpr() const;
 
@@ -65,7 +64,7 @@ public:
     Literal(const std::string& value);
     virtual ~Literal() {}
 
-    virtual std::string accept(Visitor& visitor) override;
+    virtual void accept(Visitor& visitor) override;
 
     const std::string&    getValue() const;
 
@@ -78,7 +77,7 @@ public:
     Unary(std::shared_ptr<Token> opt, std::shared_ptr<Expr> right);
     virtual ~Unary();
 
-    virtual std::string accept(Visitor& visitor) override;
+    virtual void accept(Visitor& visitor) override;
 
     Token&  getOpt() const;
     Expr&   getRight() const;

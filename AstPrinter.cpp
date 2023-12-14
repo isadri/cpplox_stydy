@@ -1,49 +1,41 @@
 #include "AstPrinter.hpp"
 
-std::string AstPrinter::print(Expr& expr) {
-    return expr.accept(*this);
+void    AstPrinter::print(Expr& expr) {
+    expr.accept(*this);
 }
 
-std::string AstPrinter::visitBinaryExpr(Binary& expr) {
-    return parenthesize(expr.getOpt().getLexeme(), expr.getLeft(),
-                        expr.getRight());
+void    AstPrinter::visitBinaryExpr(Binary& expr) {
+    parenthesize(expr.getOpt().getLexeme(), expr.getLeft(), expr.getRight());
 }
 
-std::string AstPrinter::visitGroupingExpr(Grouping& expr) {
-    return parenthesize("group", expr.getExpr());
+void    AstPrinter::visitGroupingExpr(Grouping& expr) {
+    parenthesize("group", expr.getExpr());
 }
 
-std::string AstPrinter::visitLiteralExpr(Literal& expr) {
+void    AstPrinter::visitLiteralExpr(Literal& expr) {
     if (expr.getValue().empty())
-        return "nil";
-    return expr.getValue();
+        std::cout << "nil";
+    else
+        std::cout << expr.getValue();
 }
 
-std::string AstPrinter::visitUnaryExpr(Unary& expr) {
-    return parenthesize(expr.getOpt().getLexeme(), expr.getRight());
+void    AstPrinter::visitUnaryExpr(Unary& expr) {
+    parenthesize(expr.getOpt().getLexeme(), expr.getRight());
 }
 
-std::string AstPrinter::parenthesize(const std::string& name, Expr& left,
-                                    Expr& right)
+void    AstPrinter::parenthesize(const std::string& name, Expr& expr1,
+                                Expr& expr2)
 {
-    std::string builder;
-
-    builder.append("(").append(name);
-    builder.append(" ").append(left.accept(*this));
-    builder.append(" ").append(right.accept(*this));
-    builder.append(")");
-    return builder;
+    std::cout << "(" << name;
+    std::cout << " ";
+    expr1.accept(*this);
+    std::cout << " ";
+    expr2.accept(*this);
+    std::cout << ")";
 }
 
-std::string AstPrinter::parenthesize(const std::string& name, Expr& expr) {
-    std::string builder;
-
-    builder.append("(").append(name);
-    builder.append(" ").append(expr.accept(*this));
-    builder.append(")");
-    return builder;
-}
-
-std::string AstPrinter::accept(__attribute__((unused))Visitor& visitor) {
-    return "";
+void    AstPrinter::parenthesize(const std::string& name, Expr& expr) {
+    std::cout << "(" << name << " ";
+    expr.accept(*this);
+    std::cout << ")";
 }

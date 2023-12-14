@@ -11,8 +11,8 @@ Binary::Binary(std::shared_ptr<Expr> left, std::shared_ptr<Token> opt,
 Binary::~Binary() {
 }
 
-std::string Binary::accept(Visitor& visitor) {
-    return visitor.visitBinaryExpr(*this);
+void Binary::accept(Visitor& visitor) {
+    visitor.visitBinaryExpr(*this);
 }
 
 Expr&   Binary::getLeft() const { return *_left; }

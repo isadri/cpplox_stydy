@@ -4,23 +4,22 @@
 #define __AST_PRINTER_HPP__
 
 #include "Expr.hpp"
+#include <stdarg.h>
 
 class   AstPrinter : public Visitor {
 public:
     virtual ~AstPrinter() {}
 
-    std::string print(Expr& expr);
+    void            print(Expr& expr);
 
-    std::string visitBinaryExpr(Binary& expr) override;
-    std::string visitGroupingExpr(Grouping& expr) override;
-    std::string visitLiteralExpr(Literal& expr) override;
-    std::string visitUnaryExpr(Unary& expr) override;
+    virtual void    visitBinaryExpr(Binary& expr) override;
+    virtual void    visitGroupingExpr(Grouping& expr) override;
+    virtual void    visitLiteralExpr(Literal& expr) override;
+    virtual void    visitUnaryExpr(Unary& expr) override;
 
-private:
-    std::string parenthesize(const std::string& name, Expr& left, Expr& right);
-    std::string parenthesize(const std::string& name, Expr& expr);
-
-    std::string accept(Visitor& visitor) override;
+    void            parenthesize(const std::string& name, Expr& expr);
+    void            parenthesize(const std::string& name, Expr& expr1,
+                                Expr& expr2);
 };
 
 #endif
