@@ -6,29 +6,85 @@
 #include "common.hpp"
 #include "Token.hpp"
 
-template<typename T>
-class   Binary;
-
-template<typename T>
 class   Grouping;
-
-template<typename T>
-class   Unary;
-
-template<typename T>
+class   Binary;
 class   Literal;
+class   Unary;
+class   Visitor;
 
-template<typename T>
 class   Expr {
 public:
-    class   Vistor {
-    public:
-        std::string   visitGroupingExpr(Grouping<T>& expr);
-        std::string   visitBinaryExpr(Binary<T>& expr);
-        std::string   visitLiteralExpr(Literal<T>& expr);
-        std::string   visitUnaryExpr(Unary<T>& expr);
-    };
-    virtual T   accept(Vistor& visitor) = 0;
+    virtual ~Expr() {}
+
+    virtual std::string accept(Visitor& visitor) = 0;
+};
+
+class   Visitor : public Expr {
+public:
+    virtual ~Visitor() {}
+    virtual std::string visitGroupingExpr(Grouping& expr) = 0;
+    virtual std::string visitBinaryExpr(Binary& expr) = 0;
+    virtual std::string visitLiteralExpr(Literal& expr) = 0;
+    virtual std::string visitUnaryExpr(Unary& expr) = 0;
+    virtual std::string accept(Visitor& visitor) = 0;
+};
+
+class   Binary : public Expr {
+public:
+    Binary(Expr* left, Token* opt, Expr* right);
+    virtual ~Binary();
+
+    virtual std::string accept(Visitor& visitor) override;
+
+    Expr&   getLeft() const;
+    Token&  getOpt() const;
+    Expr&   getRight() const;
+
+private:
+    Expr*   _left;
+    Token*  _opt;
+    Expr*   _right;
+};
+
+class   Grouping : public Expr {
+public:
+    Grouping(Expr* expression);
+    virtual ~Grouping();
+
+    virtual std::string accept(Visitor& visitor) override;
+
+    Expr&   getExpr() const;
+
+private:
+    Expr*   _expression;
+};
+
+class   Literal : public Expr {
+public:
+    Literal(const std::string& value);
+    virtual ~Literal() {}
+
+    virtual std::string accept(Visitor& visitor) override;
+
+    const std::string&    getValue() const;
+
+private:
+    std::string _value;
+};
+
+class   Unary : public Expr {
+public:
+    Unary(Token* opt, Expr* right);
+    virtual ~Unary();
+
+    virtual std::string accept(Visitor& visitor) override;
+
+    Token&  getOpt() const;
+    Expr&   getRight() const;
+
+private:
+    Token*  _opt;
+    Expr*   _right;
 };
 
 #endif

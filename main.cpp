@@ -1,4 +1,5 @@
 #include "Lox.hpp"
+#include "AstPrinter.hpp"
 
 [[noreturn]] void   fatal(const std::string& msg, const int& exit_status) {
     std::cerr << msg << std::endl;
@@ -16,6 +17,21 @@ int	main(int argc, char* argv[]) {
     //} else {
     //    lobj.runPrompt();
     //}
+
+    (void)argc;
+    (void)argv;
+    Expr*    expr = new Binary(
+        new Unary(
+            new Token(MINUS, "-", 1),
+            new Literal("123")
+        ),
+        new Token(STAR, "*", 1),
+        new Grouping(new Literal("45.57"))
+    );
+
+    AstPrinter  sp;
+
+    std::cout << sp.print(*expr) << std::endl;
 
     std::exit(EXIT_SUCCESS);
 }

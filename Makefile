@@ -22,7 +22,7 @@ $(NAME): $(OBJS)
 	@$(CC) $(CPPFLAGS) -c $< -o $@
 
 clean:
-	@$(RM) $(OBJ_DIR)
+	@$(RM) $(OBJS)
 fclean: clean
 	@$(RM) $(NAME)
 re: fclean all

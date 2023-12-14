@@ -1,11 +1,14 @@
-expression  ->  lieteral | unary | binary | grouping;
+expression  ->  equality;
 
-lieteral    ->  NUMBER | STRING | "true" | "false" | "nil";
+equality    ->  comparison ( ( "!=" | "==" ) comparison )*;
 
-grouping    ->  "(" expression ")";
+comparison  ->  term ( ( ">" | "+" ) factor );
 
-unary       ->  ( "-" | "!" ) expression;
+term        ->  factor ( ( "-" | "+" ) unary )*;
 
-binary      ->  expression operator expression;
+factor      ->  unary ( ( "/" | "*" ) unary )*;
 
-operator    ->  "==" | "!=" | "<" | "<=" | ">" | ">=" | "+" | "-" | "*" | "/";
+unary       ->  ( "!" | "-" ) unary
+                | primary;
+
+primary     ->  NUMBER | STRING | "true" | "false" | "nil" | "(" expression ")";
